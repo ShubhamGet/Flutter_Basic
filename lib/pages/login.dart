@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:registrationform/util/routes.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  String name = "";
+  bool changeButton = false; // for change Button
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -15,7 +23,7 @@ class Login extends StatelessWidget {
             height: 20.0,
           ),
           Text(
-            "Welcome in my NGO ",
+            "Welcome $name in my NGO ",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 22,
@@ -46,11 +54,38 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 20.0,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      print("Welcome in Singh NGO ");
-                    },
-                    child: Text("Login"))
+                InkWell(
+                  onTap: () async {
+                    setState(() {
+                      changeButton = true;
+                    });
+                    await Future.delayed(Duration(seconds: 2));
+                    Navigator.pushNamed(context, MyRoutes.registrationRoute);
+                  },
+                  child: AnimatedContainer(
+                    duration: Duration(seconds: 2),
+                    height: 40,
+                    width: changeButton ? 60 : 100,
+                    alignment: Alignment.center,
+                    child: changeButton
+                        ? Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Login",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius:
+                          BorderRadius.circular(changeButton ? 8 : 10),
+                    ),
+                  ),
+                ),
               ],
             ),
           )

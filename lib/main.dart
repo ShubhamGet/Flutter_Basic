@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registrationform/pages/login.dart';
 import 'package:registrationform/pages/registration.dart';
+import 'package:registrationform/util/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: "/registration",
+      initialRoute: "/login",
       routes: {
         "/": (context) => Login(),
-        "/login": (context) => Login(),
-        "/registration": (context) => Registration(),
+        MyRoutes.loginRoute: (context) => Login(),
+        MyRoutes.registrationRoute: (context) => Registration(),
       },
     );
   }
